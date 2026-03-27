@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Privacy Shield Pro</title>
+    <style>
+        :root { --primary: #00d2ff; --secondary: #3a7bd5; --dark: #1a1a2e; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark); color: white; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .container { width: 95%; max-width: 1200px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 40px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); }
+        h1 { text-align: center; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; }
+        .workspace { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .box-label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); margin-bottom: 10px; display: block; }
+        textarea, .output-box { width: 100%; height: 400px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: #e0e0e0; padding: 20px; font-family: 'Courier New', monospace; font-size: 14px; box-sizing: border-box; overflow-y: auto; }
+        .actions { margin-top: 30px; display: flex; gap: 15px; justify-content: center; align-items: center; }
+        button { padding: 12px 30px; border-radius: 50px; border: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-scrub { background: linear-gradient(45deg, var(--primary), var(--secondary)); color: white; }
+        .btn-download { background: #28a745; color: white; display: none; }
+        input[type="file"] { color: #888; font-size: 14px; }
+        button:hover { transform: translateY(-2px); opacity: 0.9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ AI PRIVACY SHIELD PRO</h1>
+        <div class="workspace">
+            <div>
+                <span class="box-label">Input Area (Paste or Upload)</span>
+                <textarea id="input" placeholder="Enter sensitive data here..."></textarea>
+            </div>
+            <div>
+                <span class="box-label">Shielded Output</span>
+                <div id="output" class="output-box">The cleaned version will appear here...</div>
+            </div>
+        </div>
+        <div class="actions">
+            <input type="file" id="filePicker" accept=".txt,.pdf">
+            <button class="btn-scrub" onclick="process()">✨ SHIELD DATA</button>
+            <button id="dlBtn" class="btn-download" onclick="download()">📥 DOWNLOAD PDF</button>
+        </div>
+    </div>
+
+    <script>
+        async function process() {
+            const file = document.getElementById('filePicker').files[0];
+            const inputTxt = document.getElementById('input').value;
+            const outDiv = document.getElementById('output');
+            outDiv.innerText = "Processing safely...";
+
+            let res;
+            if (file) {
+                let fd = new FormData(); fd.append("file", file);
+                res = await fetch('/scrub-file', {method: 'POST', body: fd});
+            } else {
+                res = await fetch('/scrub', {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({text: inputTxt})
+                });
+            }
+            const data = await res.json();
+            outDiv.innerText = data.scrubbed_text;
+            document.getElementById('dlBtn').style.display = 'block';
+        }
+
+        async function download() {
+            const res = await fetch('/download-pdf', {
+                method: 'POST', headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: document.getElementById('output').innerText})
+            });
+            const blob = await res.blob();
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "Shielded_Document.pdf";
+            link.click();
+        }
+    </script>
+</body>
+</html>

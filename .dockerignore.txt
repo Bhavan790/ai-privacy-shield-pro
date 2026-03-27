@@ -1,0 +1,8 @@
+# Ignore EVERYTHING first
+**/*
+
+# Now, only allow these specific files (the ones we actually need)
+!main.py
+!.env
+!requirements.txt
+!Dockerfile
