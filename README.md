@@ -31,18 +31,17 @@
 ## ⚙️ Quick Start
 
 ### 1. Clone the Repository
-git clone [https://github.com/Bhavan790/ai-privacy-shield-pro.git](https://github.com/Bhavan790/ai-privacy-shield-pro.git)
-cd ai-privacy-shield-pro
+* git clone [https://github.com/Bhavan790/ai-privacy-shield-pro.git](https://github.com/Bhavan790/ai-privacy-shield-pro.git)
+* cd ai-privacy-shield-pro
 
 ### 2. Create a .env file in the root directory:
-NVIDIA_API_KEY=your_nvidia_api_key_here
+* NVIDIA_API_KEY=your_nvidia_api_key_here
 
 ### 3. Run the docker
-docker build -t privacy-shield .
-docker run -p 8000:8000 --env-file .env privacy-shield
-Access the dashboard at: http://localhost:8000
+* docker build -t privacy-shield .
+* docker run -p 8000:8000 --env-file .env privacy-shield
+* Access the dashboard at: http://localhost:8000
 
-###🔒 Security First
 ### This project was built with security best practices:
 
 * Zero Data Retention: No data is stored locally; all processing is ephemeral.
