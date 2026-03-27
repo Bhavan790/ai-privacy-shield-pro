@@ -9,7 +9,6 @@
 **AI Privacy Shield Pro** is a high-performance, containerized web application designed to sanitize sensitive data from text and PDF documents. Unlike traditional regex-based scrubbers, this tool leverages **Large Language Model (LLM) reasoning** to identify PII (Personally Identifiable Information) based on context, ensuring higher accuracy and lower false positives.
 
 ### 🏗️ Architecture Flow
-![AI Privacy Flow](https://raw.githubusercontent.com/Bhavan790/ai-privacy-shield-pro/main/architecture-diagram.png) 
 *![ai_pro](https://github.com/user-attachments/assets/e9702a07-b55b-4694-b134-c282caa3df28)*
 
 ### ✨ Key Features
@@ -43,11 +42,7 @@ docker build -t privacy-shield .
 docker run -p 8000:8000 --env-file .env privacy-shield
 Access the dashboard at: http://localhost:8000
 
-Input (Sensitive),Output (Shielded)
-"""John Doe lives at 123 Main St.""",[PERSON] lives at [ADDRESS].
-"""Call me at 555-0199.""","""Call me at [PHONE]."
-
-🔒 Security First
+###🔒 Security First
 ### This project was built with security best practices:
 
 * Zero Data Retention: No data is stored locally; all processing is ephemeral.
