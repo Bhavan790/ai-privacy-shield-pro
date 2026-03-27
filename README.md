@@ -10,7 +10,7 @@
 
 ### 🏗️ Architecture Flow
 ![AI Privacy Flow](https://raw.githubusercontent.com/Bhavan790/ai-privacy-shield-pro/main/architecture-diagram.png) 
-*(Note: You can replace this link with a screenshot of your dashboard later!)*
+*![ai_pro](https://github.com/user-attachments/assets/e9702a07-b55b-4694-b134-c282caa3df28)*
 
 ### ✨ Key Features
 * **Contextual Scrubbing:** Uses **Meta Llama-3.1-405B** (via NVIDIA API) to distinguish between names, locations, and general nouns.
@@ -43,12 +43,12 @@ docker build -t privacy-shield .
 docker run -p 8000:8000 --env-file .env privacy-shield
 Access the dashboard at: http://localhost:8000
 
-Input (Sensitive)                     Output (Shielded)
-John Doe lives at 123 Main St.        [PERSON] lives at [ADDRESS].
-Call me at 555-0199.                  Call me at [PHONE].
+Input (Sensitive),Output (Shielded)
+"""John Doe lives at 123 Main St.""",[PERSON] lives at [ADDRESS].
+"""Call me at 555-0199.""","""Call me at [PHONE]."
 
 🔒 Security First
-* **This project was built with security best practices:
+### This project was built with security best practices:
 
 * Zero Data Retention: No data is stored locally; all processing is ephemeral.
 
